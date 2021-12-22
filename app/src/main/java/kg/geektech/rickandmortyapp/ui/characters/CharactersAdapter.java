@@ -2,6 +2,7 @@ package kg.geektech.rickandmortyapp.ui.characters;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -13,18 +14,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kg.geektech.rickandmortyapp.data.models.Character;
-import kg.geektech.rickandmortyapp.data.models.RickAndMortyResponse;
 import kg.geektech.rickandmortyapp.databinding.ItemCharacterBinding;
 
 public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.CharacterViewHolder> {
     private ItemCharacterBinding binding;
     private List<Character> characters;
+    private OnItemClick onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClick onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
 
     public CharactersAdapter() {
         characters = new ArrayList<>();
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     public void setCharacters(List<Character> characters) {
         this.characters = characters;
         notifyDataSetChanged();
@@ -40,6 +44,12 @@ public class CharactersAdapter extends RecyclerView.Adapter<CharactersAdapter.Ch
     @Override
     public void onBindViewHolder(@NonNull CharacterViewHolder holder, int position) {
         holder.onBind(characters.get(position));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickListener.onClick(characters.get(holder.getAdapterPosition()));
+            }
+        });
     }
 
     @Override

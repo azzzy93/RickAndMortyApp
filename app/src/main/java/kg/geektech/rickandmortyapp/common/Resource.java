@@ -1,6 +1,7 @@
 package kg.geektech.rickandmortyapp.common;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class Resource<T> {
 
@@ -19,7 +20,7 @@ public class Resource<T> {
         return new Resource<>(Status.SUCCESS, data, null);
     }
 
-    public static <T> Resource<T> error(String message, T data){
+    public static <T> Resource<T> error(String message, @Nullable T data){
         return new Resource<>(Status.ERROR, data, message);
     }
 

@@ -2,46 +2,21 @@
 package kg.geektech.rickandmortyapp.data.models;
 
 import java.util.List;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import java.util.Objects;
 
 public class Character {
 
-    @SerializedName("id")
-    @Expose
     private Integer id;
-    @SerializedName("name")
-    @Expose
     private String name;
-    @SerializedName("status")
-    @Expose
     private String status;
-    @SerializedName("species")
-    @Expose
     private String species;
-    @SerializedName("type")
-    @Expose
     private String type;
-    @SerializedName("gender")
-    @Expose
     private String gender;
-    @SerializedName("origin")
-    @Expose
     private Origin origin;
-    @SerializedName("location")
-    @Expose
     private Location location;
-    @SerializedName("image")
-    @Expose
     private String image;
-    @SerializedName("episode")
-    @Expose
     private List<String> episode = null;
-    @SerializedName("url")
-    @Expose
     private String url;
-    @SerializedName("created")
-    @Expose
     private String created;
 
     public Integer getId() {
@@ -140,4 +115,16 @@ public class Character {
         this.created = created;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Character character = (Character) o;
+        return Objects.equals(id, character.id) && Objects.equals(name, character.name) && Objects.equals(status, character.status) && Objects.equals(species, character.species) && Objects.equals(type, character.type) && Objects.equals(gender, character.gender) && Objects.equals(origin, character.origin) && Objects.equals(location, character.location) && Objects.equals(image, character.image) && Objects.equals(episode, character.episode) && Objects.equals(url, character.url) && Objects.equals(created, character.created);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, status, species, type, gender, origin, location, image, episode, url, created);
+    }
 }
